@@ -12,4 +12,8 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="fab">Floating Action Button</string>
     <string name="homepage">Home Background</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="submit">Submit</string>
 </resources>
