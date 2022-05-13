@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/nav_gallery"
         android:name="upr.uas.pedro.ui.login.LoginFragment"
-        android:label="@string/menu_gallery"
+        android:label="@string/login"
         tools:layout="@layout/fragment_login" />
 
     <fragment
