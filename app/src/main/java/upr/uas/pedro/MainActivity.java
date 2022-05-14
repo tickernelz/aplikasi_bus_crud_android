@@ -25,16 +25,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Create User to DB
-        DBHandler db = new DBHandler(MainActivity.this);
-        User user = new User();
-        user.setName("Admin");
-        user.setUsername("admin123");
-        user.setPassword("admin123");
-        db.InsertUser(user);
-
         upr.uas.pedro.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Create User to DB
+        DBHandler db = new DBHandler(this);
+        User user = new User();
+        user.setName("Pedro");
+        user.setUsername("admin");
+        user.setPassword("admin");
+        db.InsertUser(user);
 
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

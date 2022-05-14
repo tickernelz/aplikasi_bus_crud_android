@@ -5,6 +5,7 @@ public class User {
     private String name;
     private String username;
     private String password;
+    private int isLogin;
 
     public User(int id, String name, String username, String password) {
         this.id = id;
@@ -38,7 +39,10 @@ public class User {
         this.name = name;
     }
 
-    public String getUsername() {
+    public String getUsername(Boolean query) {
+        if (query) {
+            username = '\'' + username + '\'';
+        }
         return username;
     }
 
@@ -46,11 +50,22 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
+    public String getPassword(Boolean query) {
+        if (query) {
+            password = '\'' + password + '\'';
+        }
         return password;
     }
 
     public void setPassword(String Password) {
         password = Password;
+    }
+
+    public int getIsLogin() {
+        return isLogin;
+    }
+
+    public void setIsLogin(int isLogin) {
+        this.isLogin = isLogin;
     }
 }
