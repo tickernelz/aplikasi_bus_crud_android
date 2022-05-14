@@ -14,6 +14,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import upr.uas.pedro.databinding.ActivityMainBinding;
+import upr.uas.pedro.db.DBHandler;
+import upr.uas.pedro.db.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +24,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Create User to DB
+        DBHandler db = new DBHandler(MainActivity.this);
+        User user = new User();
+        user.setName("Admin");
+        user.setUsername("admin123");
+        user.setPassword("admin123");
+        db.InsertUser(user);
 
         upr.uas.pedro.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
