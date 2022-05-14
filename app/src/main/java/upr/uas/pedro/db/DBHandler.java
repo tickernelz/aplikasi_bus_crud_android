@@ -202,7 +202,7 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("kode", kode);
         contentValues.put("jadwal", jadwal);
 
-        long result = db.update(PemesananParams.TABLE_NAME, contentValues, UserParams.KEY_ID + "=?", new String[]{String.valueOf(id)});
+        long result = db.update(PemesananParams.TABLE_NAME, contentValues, PemesananParams.KEY_ID + "=?", new String[]{String.valueOf(id)});
 
         db.close();
         return result != -1;
@@ -210,7 +210,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public boolean deletePemesanan(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        long result = db.delete(PemesananParams.TABLE_NAME, UserParams.KEY_ID + "=?", new String[]{String.valueOf(id)});
+        long result = db.delete(PemesananParams.TABLE_NAME, PemesananParams.KEY_ID + "=?", new String[]{String.valueOf(id)});
 
         db.close();
         return result != -1;
