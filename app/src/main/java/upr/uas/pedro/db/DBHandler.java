@@ -7,7 +7,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
+import upr.uas.pedro.object.Pemesanan;
+import upr.uas.pedro.object.User;
+
 public class DBHandler extends SQLiteOpenHelper {
+    private static final String SQL_CREATE_PEMESANAN =
+            "CREATE TABLE " + PemesananParams.TABLE_NAME + "("
+                    + PemesananParams.KEY_ID + " INTEGER PRIMARY KEY, "
+                    + PemesananParams.KEY_NAMA + " TEXT, "
+                    + PemesananParams.KEY_KODE + " TEXT, "
+                    + PemesananParams.KEY_JADWAL + " TEXT)";
     public static final int DB_VERSION = 1;
     public static final String DB_NAME = "Bus.db";
 
@@ -18,9 +29,12 @@ public class DBHandler extends SQLiteOpenHelper {
                     + UserParams.KEY_USERNAME + " TEXT, "
                     + UserParams.KEY_PASSWORD + " TEXT, "
                     + UserParams.KEY_IS_LOGIN + " INTEGER DEFAULT 0)";
+    private static final String SQL_DELETE_PEMESANAN =
+            "DROP TABLE IF EXISTS " + PemesananParams.TABLE_NAME;
 
     private static final String SQL_DELETE_USER =
             "DROP TABLE IF EXISTS " + UserParams.TABLE_NAME;
+    private Context context;
 
     public DBHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -29,11 +43,13 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_USER);
+        db.execSQL(SQL_CREATE_PEMESANAN);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_USER);
+        db.execSQL(SQL_DELETE_PEMESANAN);
         onCreate(db);
     }
 
@@ -161,6 +177,58 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         return cursor.getCount();
+    }
+
+    // Pemesanan
+
+    public boolean insertPemesanan(String nama, String kode, String jadwal) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nama", nama);
+        contentValues.put("kode", kode);
+        contentValues.put("jadwal", jadwal);
+
+        long result = db.insert(PemesananParams.TABLE_NAME, null, contentValues);
+
+        return result != -1;
+    }
+
+    public boolean updatePemesanan(int id, String nama, String kode, String jadwal) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nama", nama);
+        contentValues.put("kode", kode);
+        contentValues.put("jadwal", jadwal);
+
+        long result = db.update(PemesananParams.TABLE_NAME, contentValues, UserParams.KEY_ID + "=?", new String[]{String.valueOf(id)});
+
+        db.close();
+        return result != -1;
+    }
+
+    public boolean deletePemesanan(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(PemesananParams.TABLE_NAME, UserParams.KEY_ID + "=?", new String[]{String.valueOf(id)});
+
+        db.close();
+        return result != -1;
+    }
+
+    public ArrayList<Pemesanan> getPemesananData() {
+        ArrayList<Pemesanan> pemesananList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + PemesananParams.TABLE_NAME, null);
+
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String nama = cursor.getString(1);
+            String kode = cursor.getString(2);
+            String jadwal = cursor.getString(3);
+
+            Pemesanan pemesanan = new Pemesanan(id, nama, kode, jadwal);
+            pemesananList.add(pemesanan);
+        }
+        return pemesananList;
     }
 //
 //    public List<contacts> getAllContacts(){

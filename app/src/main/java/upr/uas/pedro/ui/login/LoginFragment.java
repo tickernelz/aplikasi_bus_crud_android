@@ -18,7 +18,7 @@ import java.util.Objects;
 
 import upr.uas.pedro.R;
 import upr.uas.pedro.db.DBHandler;
-import upr.uas.pedro.db.User;
+import upr.uas.pedro.object.User;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
 

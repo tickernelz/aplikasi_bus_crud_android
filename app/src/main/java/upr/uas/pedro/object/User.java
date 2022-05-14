@@ -1,4 +1,4 @@
-package upr.uas.pedro.db;
+package upr.uas.pedro.object;
 
 public class User {
     private int id;

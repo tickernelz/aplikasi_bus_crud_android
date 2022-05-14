@@ -10,6 +10,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_pemesanan">Pemesanan</string>
     <string name="fab">Floating Action Button</string>
     <string name="homepage">Home Background</string>
     <string name="login">Login</string>
