@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="upr.uas.pedro.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="upr.uas.pedro.ui.pemesanan.PemesananFragment"
+        android:label="@string/menu_pemesanan"
+        tools:layout="@layout/fragment_pemesanan" />
 </navigation>
