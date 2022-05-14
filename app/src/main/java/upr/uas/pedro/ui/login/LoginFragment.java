@@ -3,6 +3,8 @@ package upr.uas.pedro.ui.login;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
@@ -50,7 +53,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     public void onClick(View v) {
         if (v.getId() == R.id.buttonSubmit) {
-
             EditText editText_username = requireView().findViewById(R.id.editTextUsername);
             EditText editText_password = requireView().findViewById(R.id.editTextPassword);
             Button button_submit = requireView().findViewById(R.id.buttonSubmit);
@@ -58,12 +60,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             String password = editText_password.getText().toString();
             TextView textNavName = Objects.requireNonNull(requireActivity()).findViewById(R.id.textNavName);
             TextView textNavUsername = Objects.requireNonNull(requireActivity()).findViewById(R.id.textNavUsername);
+            NavigationView navigationView = Objects.requireNonNull(requireActivity().findViewById(R.id.nav_view));
+            Menu menu = navigationView.getMenu();
+            MenuItem nav_bus = menu.findItem(R.id.nav_bus);
             DBHandler db = new DBHandler(requireContext());
             User user = new User();
             user.setUsername(username);
             user.setPassword(password);
             user.setIsLogin(1);
             if (db.checkIsLogin(user)) {
+                nav_bus.setEnabled(false);
                 user.setIsLogin(0);
                 db.updateIsLogin(user);
                 editText_username.setEnabled(true);
@@ -74,6 +80,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 Snackbar.make(requireView(), "Logout berhasil", Snackbar.LENGTH_SHORT).show();
             } else {
                 if (db.checkUser(user)) {
+                    nav_bus.setEnabled(true);
                     editText_username.setEnabled(false);
                     editText_password.setEnabled(false);
                     button_submit.setText("Logout");

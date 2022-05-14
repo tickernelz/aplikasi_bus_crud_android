@@ -17,15 +17,15 @@ public class CreateBusActivity extends AppCompatActivity {
 
     DBHandler db;
 
-    EditText etNama, etKode, etJadwal;
+    EditText etNama, etKode, etTipe, etRute;
     Button btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_pemesanan);
+        setContentView(R.layout.activity_create_bus);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Create Pemesanan");
+        setTitle("Create Bus");
         db = new DBHandler(getApplicationContext());
 
         initWidgets();
@@ -33,33 +33,37 @@ public class CreateBusActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(view -> {
             String nama = etNama.getText().toString().trim();
             String kode = etKode.getText().toString().trim();
-            String jadwal = etJadwal.getText().toString().trim();
+            String tipe = etTipe.getText().toString().trim();
+            String rute = etRute.getText().toString().trim();
 
-            if (!nama.equals("") && !kode.equals("") && !jadwal.equals("")) {
-                boolean insert = db.insertPemesanan(nama, kode, jadwal);
+            if (!nama.equals("") && !kode.equals("") && !tipe.equals("") && !rute.equals("")) {
+                boolean insert = db.insertBus(nama, kode, tipe, rute);
                 etNama.setText("");
                 etKode.setText("");
-                etJadwal.setText("");
+                etTipe.setText("");
+                etRute.setText("");
                 if (insert) {
-                    Toast.makeText(getBaseContext(), "Pemesanan berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Bus berhasil ditambahkan", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getBaseContext(), "Pemesanan gagal ditambahkan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Bus gagal ditambahkan", Toast.LENGTH_SHORT).show();
                 }
                 Intent i = new Intent(getBaseContext(), MainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finish();
+                startActivity(i);
             } else {
-                Toast.makeText(this, "Nama Pemesanan, Jadwal dan Kode harus diisi!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Nama Bus, Rute, Tipe dan Kode harus diisi!", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
     private void initWidgets() {
-        etNama = findViewById(R.id.createPemesanan_et_nama);
-        etKode = findViewById(R.id.createPemesanan_et_kode);
-        etJadwal = findViewById(R.id.createPemesanan_date_jadwal);
-        btnAdd = findViewById(R.id.createPemesanan_btn_create);
+        etNama = findViewById(R.id.createBus_et_nama);
+        etKode = findViewById(R.id.createBus_et_kode);
+        etTipe = findViewById(R.id.createBus_et_tipe);
+        etRute = findViewById(R.id.createBus_et_rute);
+        btnAdd = findViewById(R.id.createBus_btn_create);
     }
 
 

@@ -16,43 +16,43 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 import upr.uas.pedro.R;
-import upr.uas.pedro.adapter.PemesananAdapter;
-import upr.uas.pedro.crud.pemesanan.CreatePemesananActivity;
+import upr.uas.pedro.adapter.BusAdapter;
+import upr.uas.pedro.crud.bus.CreateBusActivity;
 import upr.uas.pedro.db.DBHandler;
-import upr.uas.pedro.object.Pemesanan;
+import upr.uas.pedro.object.Bus;
 
 public class BusFragment extends Fragment {
 
     DBHandler db;
-    ArrayList<Pemesanan> pemesananList;
-    ListView lvPemesanan;
-    PemesananAdapter adapter;
-    TextView tvNoPemesanan;
-    FloatingActionButton fabCreatePemesanan;
+    ArrayList<Bus> busList;
+    ListView lvBus;
+    BusAdapter adapter;
+    TextView tvNoBus;
+    FloatingActionButton fabCreateBus;
     View mView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View mView = inflater.inflate(R.layout.fragment_pemesanan, container, false);
+        View mView = inflater.inflate(R.layout.fragment_bus, container, false);
         db = new DBHandler(requireContext());
 
-        pemesananList = new ArrayList<>();
-        tvNoPemesanan = mView.findViewById(R.id.viewPemesanan_tv_noPemesanan);
-        lvPemesanan = mView.findViewById(R.id.viewPemesanan_lv_pemesananList);
-        fabCreatePemesanan = mView.findViewById(R.id.viewPemesanan_fab_createPemesanan);
-        pemesananList = db.getPemesananData();
-        adapter = new PemesananAdapter(requireContext(), pemesananList, db);
-        lvPemesanan.setAdapter(adapter);
+        busList = new ArrayList<>();
+        tvNoBus = mView.findViewById(R.id.viewBus_tv_noBus);
+        lvBus = mView.findViewById(R.id.viewBus_lv_busList);
+        fabCreateBus = mView.findViewById(R.id.viewBus_fab_createBus);
+        busList = db.getBusData();
+        adapter = new BusAdapter(requireContext(), busList, db);
+        lvBus.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        if (!pemesananList.isEmpty()) {
-            tvNoPemesanan.setVisibility(View.INVISIBLE);
+        if (!busList.isEmpty()) {
+            tvNoBus.setVisibility(View.INVISIBLE);
         } else {
-            tvNoPemesanan.setVisibility(View.VISIBLE);
+            tvNoBus.setVisibility(View.VISIBLE);
         }
 
-        fabCreatePemesanan.setOnClickListener(view -> {
-            Intent i = new Intent(getContext(), CreatePemesananActivity.class);
+        fabCreateBus.setOnClickListener(view -> {
+            Intent i = new Intent(getContext(), CreateBusActivity.class);
             startActivity(i);
         });
         return mView;
@@ -61,6 +61,6 @@ public class BusFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        upr.uas.pedro.databinding.FragmentPemesananBinding binding = null;
+        upr.uas.pedro.databinding.FragmentBusBinding binding = null;
     }
 }

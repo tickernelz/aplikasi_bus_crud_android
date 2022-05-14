@@ -14,30 +14,30 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import upr.uas.pedro.R;
-import upr.uas.pedro.crud.pemesanan.UpdatePemesananActivity;
+import upr.uas.pedro.crud.bus.UpdateBusActivity;
 import upr.uas.pedro.db.DBHandler;
-import upr.uas.pedro.object.Pemesanan;
+import upr.uas.pedro.object.Bus;
 
 public class BusAdapter extends BaseAdapter {
 
     Context context;
     DBHandler db;
-    ArrayList<Pemesanan> pemesananList;
+    ArrayList<Bus> busList;
 
-    public BusAdapter(Context context, ArrayList<Pemesanan> pemesananList, DBHandler db) {
+    public BusAdapter(Context context, ArrayList<Bus> busList, DBHandler db) {
         this.context = context;
-        this.pemesananList = pemesananList;
+        this.busList = busList;
         this.db = db;
     }
 
     @Override
     public int getCount() {
-        return this.pemesananList.size();
+        return this.busList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return pemesananList.get(position);
+        return busList.get(position);
     }
 
     @Override
@@ -49,23 +49,25 @@ public class BusAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup viewGroup) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.list_pemesanan, null);
+        view = inflater.inflate(R.layout.list_bus, null);
 
-        TextView tvNama = (TextView) view.findViewById(R.id.pemesanan_tv_nama);
-        TextView tvKode = (TextView) view.findViewById(R.id.pemesanan_tv_kode);
-        TextView tvJadwal = (TextView) view.findViewById(R.id.pemesanan_tv_jadwal);
+        TextView tvNama = (TextView) view.findViewById(R.id.bus_tv_nama);
+        TextView tvKode = (TextView) view.findViewById(R.id.bus_tv_kode);
+        TextView tvTipe = (TextView) view.findViewById(R.id.bus_tv_tipe);
+        TextView tvRute = (TextView) view.findViewById(R.id.bus_tv_rute);
 
         Button btnUpdate = (Button) view.findViewById(R.id.post_btn_update);
         Button btnDelete = (Button) view.findViewById(R.id.post_btn_delete);
 
-        Pemesanan pemesanan = pemesananList.get(position);
-        tvNama.setText(pemesanan.getNama());
-        tvKode.setText(pemesanan.getKode());
-        tvJadwal.setText(pemesanan.getJadwal());
+        Bus bus = busList.get(position);
+        tvNama.setText(bus.getNama());
+        tvKode.setText(bus.getKode());
+        tvTipe.setText(bus.getTipe());
+        tvRute.setText(bus.getRute());
 
         btnUpdate.setOnClickListener(view1 -> {
-            Intent i = new Intent(context.getApplicationContext(), UpdatePemesananActivity.class);
-            i.putExtra("Pemesanan", pemesanan);
+            Intent i = new Intent(context.getApplicationContext(), UpdateBusActivity.class);
+            i.putExtra("Bus", bus);
             context.startActivity(i);
         });
 
@@ -75,8 +77,8 @@ public class BusAdapter extends BaseAdapter {
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            boolean delete = db.deletePemesanan(pemesanan.getId());
-                            pemesananList.remove(position);
+                            boolean delete = db.deleteBus(bus.getId());
+                            busList.remove(position);
                             notifyDataSetChanged();
                             if (delete) {
                                 new AlertDialog.Builder(context)

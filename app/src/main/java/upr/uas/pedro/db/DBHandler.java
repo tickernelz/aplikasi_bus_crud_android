@@ -17,14 +17,23 @@ import upr.uas.pedro.object.Pemesanan;
 import upr.uas.pedro.object.User;
 
 public class DBHandler extends SQLiteOpenHelper {
+    public static final int DB_VERSION = 1;
+    public static final String DB_NAME = "Bus.db";
+
     private static final String SQL_CREATE_PEMESANAN =
             "CREATE TABLE " + PemesananParams.TABLE_NAME + "("
                     + PemesananParams.KEY_ID + " INTEGER PRIMARY KEY, "
                     + PemesananParams.KEY_NAMA + " TEXT, "
                     + PemesananParams.KEY_KODE + " TEXT, "
                     + PemesananParams.KEY_JADWAL + " TEXT)";
-    public static final int DB_VERSION = 1;
-    public static final String DB_NAME = "Bus.db";
+
+    private static final String SQL_CREATE_BUS =
+            "CREATE TABLE " + BusParams.TABLE_NAME + "("
+                    + BusParams.KEY_ID + " INTEGER PRIMARY KEY, "
+                    + BusParams.KEY_NAMA + " TEXT, "
+                    + BusParams.KEY_KODE + " TEXT, "
+                    + BusParams.KEY_TIPE + " TEXT, "
+                    + BusParams.KEY_RUTE + " TEXT)";
 
     private static final String SQL_CREATE_USER =
             "CREATE TABLE " + UserParams.TABLE_NAME + "("
@@ -33,12 +42,15 @@ public class DBHandler extends SQLiteOpenHelper {
                     + UserParams.KEY_USERNAME + " TEXT, "
                     + UserParams.KEY_PASSWORD + " TEXT, "
                     + UserParams.KEY_IS_LOGIN + " INTEGER DEFAULT 0)";
+
     private static final String SQL_DELETE_PEMESANAN =
             "DROP TABLE IF EXISTS " + PemesananParams.TABLE_NAME;
 
+    private static final String SQL_DELETE_BUS =
+            "DROP TABLE IF EXISTS " + BusParams.TABLE_NAME;
+
     private static final String SQL_DELETE_USER =
             "DROP TABLE IF EXISTS " + UserParams.TABLE_NAME;
-    private Context context;
 
     public DBHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -48,12 +60,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_USER);
         db.execSQL(SQL_CREATE_PEMESANAN);
+        db.execSQL(SQL_CREATE_BUS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_USER);
         db.execSQL(SQL_DELETE_PEMESANAN);
+        db.execSQL(SQL_DELETE_BUS);
         onCreate(db);
     }
 
@@ -282,7 +296,7 @@ public class DBHandler extends SQLiteOpenHelper {
             String nama = cursor.getString(1);
             String kode = cursor.getString(2);
             String tipe = cursor.getString(3);
-            String rute = cursor.getString(3);
+            String rute = cursor.getString(4);
 
             Bus bus = new Bus(id, nama, kode, tipe, rute);
             busList.add(bus);

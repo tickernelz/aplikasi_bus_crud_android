@@ -12,41 +12,43 @@ import androidx.appcompat.app.AppCompatActivity;
 import upr.uas.pedro.MainActivity;
 import upr.uas.pedro.R;
 import upr.uas.pedro.db.DBHandler;
-import upr.uas.pedro.object.Pemesanan;
+import upr.uas.pedro.object.Bus;
 
 public class UpdateBusActivity extends AppCompatActivity {
 
-    EditText etNama, etKode, etJadwal;
+    EditText etNama, etKode, etTipe, etRute;
     Button btnUpdate;
     DBHandler db;
-    Pemesanan pemesanan;
+    Bus bus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_pemesanan);
+        setContentView(R.layout.activity_update_bus);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Update Pemesanan");
+        setTitle("Update Bus");
 
         initWidgets();
 
-        pemesanan = getIntent().getParcelableExtra("Pemesanan");
-        etNama.setText(pemesanan.getNama());
-        etKode.setText(pemesanan.getKode());
-        etJadwal.setText(pemesanan.getJadwal());
+        bus = getIntent().getParcelableExtra("Bus");
+        etNama.setText(bus.getNama());
+        etKode.setText(bus.getKode());
+        etTipe.setText(bus.getTipe());
+        etRute.setText(bus.getRute());
 
 
         btnUpdate.setOnClickListener(view -> {
             String nama = etNama.getText().toString().trim();
             String kode = etKode.getText().toString().trim();
-            String jadwal = etJadwal.getText().toString().trim();
+            String tipe = etTipe.getText().toString().trim();
+            String rute = etRute.getText().toString().trim();
 
-            boolean update = db.updatePemesanan(pemesanan.getId(), nama, kode, jadwal);
+            boolean update = db.updateBus(bus.getId(), nama, kode, tipe, rute);
 
             if (update) {
-                Toast.makeText(getBaseContext(), "Pemesanan berhasil diupdate", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Bus berhasil diupdate", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getBaseContext(), "Pemesanan gagal diupdate", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Bus gagal diupdate", Toast.LENGTH_SHORT).show();
             }
 
             Intent i = new Intent(getBaseContext(), MainActivity.class);
@@ -58,10 +60,11 @@ public class UpdateBusActivity extends AppCompatActivity {
 
     private void initWidgets() {
         db = new DBHandler(this);
-        etNama = findViewById(R.id.updatePemesanan_et_nama);
-        etKode = findViewById(R.id.updatePemesanan_et_kode);
-        etJadwal = findViewById(R.id.updatePemesanan_date_jadwal);
-        btnUpdate = findViewById(R.id.updatePemesanan_btn_update);
+        etNama = findViewById(R.id.updateBus_et_nama);
+        etKode = findViewById(R.id.updateBus_et_kode);
+        etTipe = findViewById(R.id.updateBus_et_tipe);
+        etRute = findViewById(R.id.updateBus_et_rute);
+        btnUpdate = findViewById(R.id.updateBus_btn_update);
     }
 
     @Override

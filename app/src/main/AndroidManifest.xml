@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".crud.pemesanan.UpdatePemesananActivity" />
         <activity android:name=".crud.pemesanan.CreatePemesananActivity" />
+        <activity android:name=".crud.bus.UpdateBusActivity" />
+        <activity android:name=".crud.bus.CreateBusActivity" />
     </application>
 
 </manifest>
