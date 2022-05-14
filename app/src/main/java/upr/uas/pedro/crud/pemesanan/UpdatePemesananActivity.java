@@ -1,4 +1,4 @@
-package upr.uas.pedro;
+package upr.uas.pedro.crud.pemesanan;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import upr.uas.pedro.MainActivity;
+import upr.uas.pedro.R;
 import upr.uas.pedro.db.DBHandler;
 import upr.uas.pedro.object.Pemesanan;
 

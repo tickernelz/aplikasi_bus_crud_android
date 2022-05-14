@@ -1,4 +1,4 @@
-package upr.uas.pedro.db;
+package upr.uas.pedro.db.params;
 
 public class PemesananParams {
     public static final String TABLE_NAME = "pemesanan_params";

@@ -1,4 +1,4 @@
-package upr.uas.pedro;
+package upr.uas.pedro.crud.pemesanan;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import upr.uas.pedro.MainActivity;
+import upr.uas.pedro.R;
 import upr.uas.pedro.db.DBHandler;
 
 public class CreatePemesananActivity extends AppCompatActivity {
@@ -47,7 +49,7 @@ public class CreatePemesananActivity extends AppCompatActivity {
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finish();
             } else {
-                Toast.makeText(this, "Nama Obat, Jadwal dan Kode harus diisi!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Nama Pemesanan, Jadwal dan Kode harus diisi!", Toast.LENGTH_SHORT).show();
             }
         });
 

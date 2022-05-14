@@ -19,8 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UpdatePemesananActivity" />
-        <activity android:name=".CreatePemesananActivity" />
+        <activity android:name=".crud.pemesanan.UpdatePemesananActivity" />
+        <activity android:name=".crud.pemesanan.CreatePemesananActivity" />
     </application>
 
 </manifest>
