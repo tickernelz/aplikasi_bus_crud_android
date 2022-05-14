@@ -30,29 +30,64 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         return mView;
     }
 
-    public void onClick(View v) {
-        if (v.getId() == R.id.buttonSubmit) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Inflate the layout for this fragment
+        DBHandler db = new DBHandler(requireContext());
+        User user = new User();
+        user.setIsLogin(1);
+        if (db.checkIsLogin(user)) {
             EditText editText_username = requireView().findViewById(R.id.editTextUsername);
             EditText editText_password = requireView().findViewById(R.id.editTextPassword);
+            Button button_submit = requireView().findViewById(R.id.buttonSubmit);
+            editText_username.setText(user.getUsername(false));
+            editText_password.setText(user.getPassword(false));
+            editText_username.setEnabled(false);
+            editText_password.setEnabled(false);
+            button_submit.setText("Logout");
+        }
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.buttonSubmit) {
+
+            EditText editText_username = requireView().findViewById(R.id.editTextUsername);
+            EditText editText_password = requireView().findViewById(R.id.editTextPassword);
+            Button button_submit = requireView().findViewById(R.id.buttonSubmit);
             String username = editText_username.getText().toString();
             String password = editText_password.getText().toString();
+            TextView textNavName = Objects.requireNonNull(requireActivity()).findViewById(R.id.textNavName);
+            TextView textNavUsername = Objects.requireNonNull(requireActivity()).findViewById(R.id.textNavUsername);
             DBHandler db = new DBHandler(requireContext());
             User user = new User();
             user.setUsername(username);
             user.setPassword(password);
-            if (db.checkUser(user)) {
-                TextView textNavName = Objects.requireNonNull(requireActivity()).findViewById(R.id.textNavName);
-                TextView textNavUsername = Objects.requireNonNull(requireActivity()).findViewById(R.id.textNavUsername);
-                textNavName.setText("Halo " + db.getName(user));
-                textNavUsername.setText(db.getUsername(user));
-                // Set isLogin
-                user.setIsLogin(1);
+            user.setIsLogin(1);
+            if (db.checkIsLogin(user)) {
+                user.setIsLogin(0);
                 db.updateIsLogin(user);
-                Snackbar.make(requireView(), "Login Success", Snackbar.LENGTH_SHORT).show();
-                Log.d("LoginFragment", "User exists");
+                editText_username.setEnabled(true);
+                editText_password.setEnabled(true);
+                button_submit.setText("Submit");
+                textNavName.setText("Login dulu ngab");
+                textNavUsername.setText("");
+                Snackbar.make(requireView(), "Logout berhasil", Snackbar.LENGTH_SHORT).show();
             } else {
-                Snackbar.make(requireView(), "Username atau password salah", Snackbar.LENGTH_LONG).show();
-                Log.d("LoginFragment", "User does not exist");
+                if (db.checkUser(user)) {
+                    editText_username.setEnabled(false);
+                    editText_password.setEnabled(false);
+                    button_submit.setText("Logout");
+                    textNavName.setText("Welcome " + db.getName(user));
+                    textNavUsername.setText(db.getUsername(user));
+                    // Set isLogin
+                    user.setIsLogin(1);
+                    db.updateIsLogin(user);
+                    Snackbar.make(requireView(), "Login Success", Snackbar.LENGTH_SHORT).show();
+                    Log.d("LoginFragment", "User exists");
+                } else {
+                    Snackbar.make(requireView(), "Username atau password salah", Snackbar.LENGTH_LONG).show();
+                    Log.d("LoginFragment", "User does not exist");
+                }
             }
         }
     }

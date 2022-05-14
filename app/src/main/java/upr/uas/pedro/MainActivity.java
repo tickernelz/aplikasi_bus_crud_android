@@ -1,7 +1,10 @@
 package upr.uas.pedro;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -50,6 +53,28 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+    }
+
+    @Override
+    protected void onResume() {
+        DBHandler db = new DBHandler(this);
+        User user = new User();
+        user.setIsLogin(1);
+        super.onResume();
+        new Handler().postDelayed(() -> {
+            LinearLayout linearLayout = findViewById(R.id.nav_header_main);
+            TextView textNavName = findViewById(R.id.textNavName);
+            TextView textNavUsername = findViewById(R.id.textNavUsername);
+            if (db.checkIsLogin(user)) {
+                textNavName.setText("Welcome " + db.getName(user));
+                textNavUsername.setText(db.getUsername(user));
+            } else {
+                textNavName.setText("Login dulu ngab");
+                textNavUsername.setText("");
+            }
+            linearLayout.setVisibility(LinearLayout.VISIBLE);
+        }, 2000);
     }
 
     @Override

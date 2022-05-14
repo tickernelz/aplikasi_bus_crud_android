@@ -127,10 +127,13 @@ public class DBHandler extends SQLiteOpenHelper {
 
         //Generating query to read from DataBase
         String select = "SELECT * FROM " + UserParams.TABLE_NAME + " WHERE "
-                + UserParams.KEY_IS_LOGIN + " = " + true;
+                + UserParams.KEY_IS_LOGIN + " = " + 1;
         Cursor cursor = db.rawQuery(select, null);
         if (cursor.moveToFirst()) {
+            user.setId(cursor.getInt(0));
             user.setName(cursor.getString(1));
+            user.setUsername(cursor.getString(2));
+            user.setPassword(cursor.getString(3));
             Log.d("Bus.db", "Successfully read " + user.getId() + " " + user.getName());
             cursor.close();
             db.close();
