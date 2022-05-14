@@ -3,6 +3,7 @@ package upr.uas.pedro;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_login, R.id.nav_pemesanan, R.id.nav_bus)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -63,7 +64,11 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout linearLayout = findViewById(R.id.nav_header_main);
             TextView textNavName = findViewById(R.id.textNavName);
             TextView textNavUsername = findViewById(R.id.textNavUsername);
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            Menu menu = navigationView.getMenu();
+            MenuItem nav_bus = menu.findItem(R.id.nav_bus);
             if (db.checkIsLogin(user)) {
+                nav_bus.setEnabled(true);
                 textNavName.setText("Welcome " + db.getName(user));
                 textNavUsername.setText(db.getUsername(user));
             } else {
@@ -71,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 textNavUsername.setText("");
             }
             linearLayout.setVisibility(LinearLayout.VISIBLE);
-        }, 2000);
+        }, 1000);
     }
 
     @Override

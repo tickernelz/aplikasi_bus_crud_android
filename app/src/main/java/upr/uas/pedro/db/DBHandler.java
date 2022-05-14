@@ -9,20 +9,31 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import upr.uas.pedro.db.params.BusParams;
 import upr.uas.pedro.db.params.PemesananParams;
 import upr.uas.pedro.db.params.UserParams;
+import upr.uas.pedro.object.Bus;
 import upr.uas.pedro.object.Pemesanan;
 import upr.uas.pedro.object.User;
 
 public class DBHandler extends SQLiteOpenHelper {
+    public static final int DB_VERSION = 1;
+    public static final String DB_NAME = "Bus.db";
+
     private static final String SQL_CREATE_PEMESANAN =
             "CREATE TABLE " + PemesananParams.TABLE_NAME + "("
                     + PemesananParams.KEY_ID + " INTEGER PRIMARY KEY, "
                     + PemesananParams.KEY_NAMA + " TEXT, "
                     + PemesananParams.KEY_KODE + " TEXT, "
                     + PemesananParams.KEY_JADWAL + " TEXT)";
-    public static final int DB_VERSION = 1;
-    public static final String DB_NAME = "Bus.db";
+
+    private static final String SQL_CREATE_BUS =
+            "CREATE TABLE " + BusParams.TABLE_NAME + "("
+                    + BusParams.KEY_ID + " INTEGER PRIMARY KEY, "
+                    + BusParams.KEY_NAMA + " TEXT, "
+                    + BusParams.KEY_KODE + " TEXT, "
+                    + BusParams.KEY_TIPE + " TEXT, "
+                    + BusParams.KEY_RUTE + " TEXT)";
 
     private static final String SQL_CREATE_USER =
             "CREATE TABLE " + UserParams.TABLE_NAME + "("
@@ -31,12 +42,15 @@ public class DBHandler extends SQLiteOpenHelper {
                     + UserParams.KEY_USERNAME + " TEXT, "
                     + UserParams.KEY_PASSWORD + " TEXT, "
                     + UserParams.KEY_IS_LOGIN + " INTEGER DEFAULT 0)";
+
     private static final String SQL_DELETE_PEMESANAN =
             "DROP TABLE IF EXISTS " + PemesananParams.TABLE_NAME;
 
+    private static final String SQL_DELETE_BUS =
+            "DROP TABLE IF EXISTS " + BusParams.TABLE_NAME;
+
     private static final String SQL_DELETE_USER =
             "DROP TABLE IF EXISTS " + UserParams.TABLE_NAME;
-    private Context context;
 
     public DBHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -46,12 +60,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_USER);
         db.execSQL(SQL_CREATE_PEMESANAN);
+        db.execSQL(SQL_CREATE_BUS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_USER);
         db.execSQL(SQL_DELETE_PEMESANAN);
+        db.execSQL(SQL_DELETE_BUS);
         onCreate(db);
     }
 
@@ -232,54 +248,60 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return pemesananList;
     }
-//
-//    public List<contacts> getAllContacts(){
-//        List<contacts> contactsList = new ArrayList<>();
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        //Generating query to read from DataBase
-//        String select = "SELECT * FROM " + Params.TABLE_NAME;
-//        Cursor cursor  = db.rawQuery(select, null);
-//
-//        //Loop through now
-//        if(cursor.moveToFirst()){
-//            do{
-//                contacts contact = new contacts();
-//                contact.setId(Integer.parseInt(cursor.getString(0)));
-//                contact.setName(cursor.getString(1));
-//                contact.setPhoneNumber(cursor.getString(2));
-//                contact.setYear(cursor.getString(3));
-//                contact.setBranch(cursor.getString(4));
-//                contactsList.add(contact);
-//            }while(cursor.moveToNext());
-//        }
-//        cursor.close();
-//        return contactsList;
-//    }
-//
-//    public int updateContact(contacts contact){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//
-//        values.put(Params.KEY_NAME, contact.getName());
-//        values.put(Params.KEY_PHONE, contact.getPhoneNumber());
-//        values.put(Params.KEY_YEAR, contact.getYear());
-//        values.put(Params.KEY_BRANCH, contact.getBranch());
-//
-//        //Updating
-//        return db.update(Params.TABLE_NAME, values, Params.KEY_ID + "=?", new String[]{String.valueOf(contact.getId())});
-//    }
-//
-//    public void deleteContactbyID(int id){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.delete(Params.TABLE_NAME, Params.KEY_ID + "=?", new String[]{String.valueOf(id)});
-//        db.close();
-//    }
-//    public void deleteContact(contacts contact){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.delete(Params.TABLE_NAME, Params.KEY_ID + "=?", new String[]{String.valueOf(contact.getId())});
-//        db.close();
-//    }
-//
+
+    /* Bus */
+
+    public boolean insertBus(String nama, String kode, String tipe, String rute) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BusParams.KEY_NAMA, nama);
+        contentValues.put(BusParams.KEY_KODE, kode);
+        contentValues.put(BusParams.KEY_TIPE, tipe);
+        contentValues.put(BusParams.KEY_RUTE, rute);
+
+        long result = db.insert(BusParams.TABLE_NAME, null, contentValues);
+
+        return result != -1;
+    }
+
+    public boolean updateBus(int id, String nama, String kode, String tipe, String rute) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BusParams.KEY_NAMA, nama);
+        contentValues.put(BusParams.KEY_KODE, kode);
+        contentValues.put(BusParams.KEY_TIPE, tipe);
+        contentValues.put(BusParams.KEY_RUTE, rute);
+
+        long result = db.update(BusParams.TABLE_NAME, contentValues, BusParams.KEY_ID + "=?", new String[]{String.valueOf(id)});
+
+        db.close();
+        return result != -1;
+    }
+
+    public boolean deleteBus(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(BusParams.TABLE_NAME, BusParams.KEY_ID + "=?", new String[]{String.valueOf(id)});
+
+        db.close();
+        return result != -1;
+    }
+
+    public ArrayList<Bus> getBusData() {
+        ArrayList<Bus> busList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + BusParams.TABLE_NAME, null);
+
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String nama = cursor.getString(1);
+            String kode = cursor.getString(2);
+            String tipe = cursor.getString(3);
+            String rute = cursor.getString(4);
+
+            Bus bus = new Bus(id, nama, kode, tipe, rute);
+            busList.add(bus);
+        }
+        return busList;
+    }
 
 }

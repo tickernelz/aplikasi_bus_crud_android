@@ -12,14 +12,20 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_login"
         android:name="upr.uas.pedro.ui.login.LoginFragment"
         android:label="@string/login"
         tools:layout="@layout/fragment_login" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_pemesanan"
         android:name="upr.uas.pedro.ui.pemesanan.PemesananFragment"
         android:label="@string/menu_pemesanan"
         tools:layout="@layout/fragment_pemesanan" />
+
+    <fragment
+        android:id="@+id/nav_bus"
+        android:name="upr.uas.pedro.ui.bus.BusFragment"
+        android:label="@string/menu_bus"
+        tools:layout="@layout/fragment_bus" />
 </navigation>
