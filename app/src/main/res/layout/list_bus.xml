@@ -15,7 +15,6 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Lorem Ipsum"
-            android:textColor="@color/black2"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -28,16 +27,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kode Bus: "
-                android:textColor="@color/black2" />
+                android:text="Kode Bus: " />
 
             <TextView
                 android:id="@+id/bus_tv_kode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="[kode]"
-                android:textColor="@color/black2" />
+                android:text="[kode]" />
 
         </LinearLayout>
 
@@ -49,16 +46,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipe: "
-                android:textColor="@color/black2" />
+                android:text="Tipe: " />
 
             <TextView
                 android:id="@+id/bus_tv_tipe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="[tipe]"
-                android:textColor="@color/black2" />
+                android:text="[tipe]" />
 
         </LinearLayout>
 
@@ -70,16 +65,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rute: "
-                android:textColor="@color/black2" />
+                android:text="Rute: " />
 
             <TextView
                 android:id="@+id/bus_tv_rute"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="[rute]"
-                android:textColor="@color/black2" />
+                android:text="[rute]" />
 
         </LinearLayout>
 
