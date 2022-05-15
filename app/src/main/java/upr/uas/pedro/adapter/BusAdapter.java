@@ -20,87 +20,95 @@ import upr.uas.pedro.object.Bus;
 
 public class BusAdapter extends BaseAdapter {
 
-    Context context;
-    DBHandler db;
-    ArrayList<Bus> busList;
+  Context context;
+  DBHandler db;
+  ArrayList<Bus> busList;
 
-    public BusAdapter(Context context, ArrayList<Bus> busList, DBHandler db) {
-        this.context = context;
-        this.busList = busList;
-        this.db = db;
-    }
+  public BusAdapter(Context context, ArrayList<Bus> busList, DBHandler db) {
+    this.context = context;
+    this.busList = busList;
+    this.db = db;
+  }
 
-    @Override
-    public int getCount() {
-        return this.busList.size();
-    }
+  @Override
+  public int getCount() {
+    return this.busList.size();
+  }
 
-    @Override
-    public Object getItem(int position) {
-        return busList.get(position);
-    }
+  @Override
+  public Object getItem(int position) {
+    return busList.get(position);
+  }
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
+  @Override
+  public long getItemId(int position) {
+    return position;
+  }
 
-    @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+  @Override
+  public View getView(int position, View view, ViewGroup viewGroup) {
 
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.list_bus, null);
+    LayoutInflater inflater =
+        (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    view = inflater.inflate(R.layout.list_bus, null);
 
-        TextView tvNama = (TextView) view.findViewById(R.id.bus_tv_nama);
-        TextView tvKode = (TextView) view.findViewById(R.id.bus_tv_kode);
-        TextView tvTipe = (TextView) view.findViewById(R.id.bus_tv_tipe);
-        TextView tvRute = (TextView) view.findViewById(R.id.bus_tv_rute);
+    TextView tvNama = (TextView) view.findViewById(R.id.bus_tv_nama);
+    TextView tvKode = (TextView) view.findViewById(R.id.bus_tv_kode);
+    TextView tvTipe = (TextView) view.findViewById(R.id.bus_tv_tipe);
+    TextView tvRute = (TextView) view.findViewById(R.id.bus_tv_rute);
 
-        Button btnUpdate = (Button) view.findViewById(R.id.post_btn_update);
-        Button btnDelete = (Button) view.findViewById(R.id.post_btn_delete);
+    Button btnUpdate = (Button) view.findViewById(R.id.post_btn_update);
+    Button btnDelete = (Button) view.findViewById(R.id.post_btn_delete);
 
-        Bus bus = busList.get(position);
-        tvNama.setText(bus.getNama());
-        tvKode.setText(bus.getKode());
-        tvTipe.setText(bus.getTipe());
-        tvRute.setText(bus.getRute());
+    Bus bus = busList.get(position);
+    tvNama.setText(bus.getNama());
+    tvKode.setText(bus.getKode());
+    tvTipe.setText(bus.getTipe());
+    tvRute.setText(bus.getRute());
 
-        btnUpdate.setOnClickListener(view1 -> {
-            Intent i = new Intent(context.getApplicationContext(), UpdateBusActivity.class);
-            i.putExtra("Bus", bus);
-            context.startActivity(i);
+    btnUpdate.setOnClickListener(
+        view1 -> {
+          Intent i = new Intent(context.getApplicationContext(), UpdateBusActivity.class);
+          i.putExtra("Bus", bus);
+          context.startActivity(i);
         });
 
-        btnDelete.setOnClickListener(view1 -> {
-            new AlertDialog.Builder(context)
-                    .setMessage("Are you sure you want to delete?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            boolean delete = db.deleteBus(bus.getId());
-                            busList.remove(position);
-                            notifyDataSetChanged();
-                            if (delete) {
-                                new AlertDialog.Builder(context)
-                                        .setMessage("Delete Success")
-                                        .setPositiveButton("OK", null)
-                                        .show();
-                            } else {
-                                new AlertDialog.Builder(context)
-                                        .setMessage("Delete Failed")
-                                        .setPositiveButton("OK", null)
-                                        .show();
-                            }
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
-                        }
-                    }).show();
+    btnDelete.setOnClickListener(
+        view1 -> {
+          new AlertDialog.Builder(context)
+              .setMessage("Are you sure you want to delete?")
+              .setPositiveButton(
+                  "Yes",
+                  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                      boolean delete = db.deleteBus(bus.getId());
+                      busList.remove(position);
+                      notifyDataSetChanged();
+                      if (delete) {
+                        new AlertDialog.Builder(context)
+                            .setMessage("Delete Success")
+                            .setPositiveButton("OK", null)
+                            .show();
+                      } else {
+                        new AlertDialog.Builder(context)
+                            .setMessage("Delete Failed")
+                            .setPositiveButton("OK", null)
+                            .show();
+                      }
+                    }
+                  })
+              .setNegativeButton(
+                  "No",
+                  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                      dialogInterface.cancel();
+                    }
+                  })
+              .show();
         });
 
-        return view;
-    }
+    return view;
+  }
 }
