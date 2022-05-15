@@ -11,9 +11,11 @@ import java.util.ArrayList;
 
 import upr.uas.pedro.db.params.BusParams;
 import upr.uas.pedro.db.params.PemesananParams;
+import upr.uas.pedro.db.params.PenumpangParams;
 import upr.uas.pedro.db.params.UserParams;
 import upr.uas.pedro.object.Bus;
 import upr.uas.pedro.object.Pemesanan;
+import upr.uas.pedro.object.Penumpang;
 import upr.uas.pedro.object.User;
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -48,6 +50,19 @@ public class DBHandler extends SQLiteOpenHelper {
           + BusParams.KEY_RUTE
           + " TEXT)";
 
+  private static final String SQL_CREATE_PENUMPANG =
+      "CREATE TABLE "
+          + PenumpangParams.TABLE_NAME
+          + "("
+          + PenumpangParams.KEY_ID
+          + " INTEGER PRIMARY KEY, "
+          + PenumpangParams.KEY_NAMA
+          + " TEXT, "
+          + PenumpangParams.KEY_UMUR
+          + " TEXT, "
+          + PenumpangParams.KEY_KELAMIN
+          + " TEXT)";
+
   private static final String SQL_CREATE_USER =
       "CREATE TABLE "
           + UserParams.TABLE_NAME
@@ -68,6 +83,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
   private static final String SQL_DELETE_BUS = "DROP TABLE IF EXISTS " + BusParams.TABLE_NAME;
 
+  private static final String SQL_DELETE_PENUMPANG =
+      "DROP TABLE IF EXISTS " + PenumpangParams.TABLE_NAME;
+
   private static final String SQL_DELETE_USER = "DROP TABLE IF EXISTS " + UserParams.TABLE_NAME;
 
   public DBHandler(Context context) {
@@ -79,6 +97,7 @@ public class DBHandler extends SQLiteOpenHelper {
     db.execSQL(SQL_CREATE_USER);
     db.execSQL(SQL_CREATE_PEMESANAN);
     db.execSQL(SQL_CREATE_BUS);
+    db.execSQL(SQL_CREATE_PENUMPANG);
   }
 
   @Override
@@ -86,6 +105,7 @@ public class DBHandler extends SQLiteOpenHelper {
     db.execSQL(SQL_DELETE_USER);
     db.execSQL(SQL_DELETE_PEMESANAN);
     db.execSQL(SQL_DELETE_BUS);
+    db.execSQL(SQL_DELETE_PENUMPANG);
     onCreate(db);
   }
 
@@ -357,5 +377,66 @@ public class DBHandler extends SQLiteOpenHelper {
       busList.add(bus);
     }
     return busList;
+  }
+
+  /* Penumpang */
+
+  public boolean insertPenumpang(String nama, String umur, String kelamin) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues contentValues = new ContentValues();
+    contentValues.put(PenumpangParams.KEY_NAMA, nama);
+    contentValues.put(PenumpangParams.KEY_UMUR, umur);
+    contentValues.put(PenumpangParams.KEY_KELAMIN, kelamin);
+
+    long result = db.insert(PenumpangParams.TABLE_NAME, null, contentValues);
+
+    return result != -1;
+  }
+
+  public boolean updatePenumpang(int id, String nama, String umur, String kelamin) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues contentValues = new ContentValues();
+    contentValues.put(PenumpangParams.KEY_NAMA, nama);
+    contentValues.put(PenumpangParams.KEY_UMUR, umur);
+    contentValues.put(PenumpangParams.KEY_KELAMIN, kelamin);
+
+    long result =
+        db.update(
+            PenumpangParams.TABLE_NAME,
+            contentValues,
+            PenumpangParams.KEY_ID + "=?",
+            new String[] {String.valueOf(id)});
+
+    db.close();
+    return result != -1;
+  }
+
+  public boolean deletePenumpang(int id) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    long result =
+        db.delete(
+            PenumpangParams.TABLE_NAME,
+            PenumpangParams.KEY_ID + "=?",
+            new String[] {String.valueOf(id)});
+
+    db.close();
+    return result != -1;
+  }
+
+  public ArrayList<Penumpang> getPenumpangData() {
+    ArrayList<Penumpang> penumpangList = new ArrayList<>();
+    SQLiteDatabase db = this.getReadableDatabase();
+    Cursor cursor = db.rawQuery("SELECT * FROM " + PenumpangParams.TABLE_NAME, null);
+
+    while (cursor.moveToNext()) {
+      int id = cursor.getInt(0);
+      String nama = cursor.getString(1);
+      String umur = cursor.getString(2);
+      String kelamin = cursor.getString(3);
+
+      Penumpang penumpang = new Penumpang(id, nama, umur, kelamin);
+      penumpangList.add(penumpang);
+    }
+    return penumpangList;
   }
 }

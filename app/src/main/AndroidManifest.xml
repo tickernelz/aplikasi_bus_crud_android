@@ -23,6 +23,8 @@
         <activity android:name=".crud.pemesanan.CreatePemesananActivity" />
         <activity android:name=".crud.bus.UpdateBusActivity" />
         <activity android:name=".crud.bus.CreateBusActivity" />
+        <activity android:name=".crud.penumpang.UpdatePenumpangActivity" />
+        <activity android:name=".crud.penumpang.CreatePenumpangActivity" />
     </application>
 
 </manifest>

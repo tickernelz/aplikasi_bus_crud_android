@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     // menu should be considered as top level destinations.
     mAppBarConfiguration =
         new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_login, R.id.nav_pemesanan, R.id.nav_bus)
+                R.id.nav_home, R.id.nav_login, R.id.nav_pemesanan, R.id.nav_bus, R.id.nav_penumpang)
             .setOpenableLayout(drawer)
             .build();
     NavController navController =
@@ -71,8 +71,10 @@ public class MainActivity extends AppCompatActivity {
               NavigationView navigationView = findViewById(R.id.nav_view);
               Menu menu = navigationView.getMenu();
               MenuItem nav_bus = menu.findItem(R.id.nav_bus);
+              MenuItem nav_penumpang = menu.findItem(R.id.nav_penumpang);
               if (db.checkIsLogin(user)) {
                 nav_bus.setEnabled(true);
+                nav_penumpang.setEnabled(true);
                 textNavName.setText("Welcome " + db.getName(user));
                 textNavUsername.setText(db.getUsername(user));
               } else {
