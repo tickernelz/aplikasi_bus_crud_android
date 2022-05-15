@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".crud.bus.UpdateBusActivity">
+    tools:context=".crud.penumpang.UpdatePenumpangActivity">
 
     <LinearLayout
-        android:id="@+id/updateBus_ll_nama"
+        android:id="@+id/updatePenumpang_ll_nama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -16,10 +16,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nama Bus" />
+            android:text="Nama Penumpang" />
 
         <EditText
-            android:id="@+id/updateBus_et_nama"
+            android:id="@+id/updatePenumpang_et_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
@@ -27,70 +27,50 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/updateBus_ll_deskripsi"
+        android:id="@+id/updatePenumpang_ll_deskripsi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/updateBus_ll_nama"
+        android:layout_below="@+id/updatePenumpang_ll_nama"
         android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kode" />
+            android:text="Umur" />
 
         <EditText
-            android:id="@+id/updateBus_et_kode"
+            android:id="@+id/updatePenumpang_et_umur"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/updateBus_ll_tipe"
+        android:id="@+id/updatePenumpang_ll_kelamin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/updateBus_ll_deskripsi"
+        android:layout_below="@+id/updatePenumpang_ll_deskripsi"
         android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tipe" />
+            android:text="Kelamin" />
 
         <EditText
-            android:id="@+id/updateBus_et_tipe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/updateBus_ll_rute"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/updateBus_ll_tipe"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rute" />
-
-        <EditText
-            android:id="@+id/updateBus_et_rute"
+            android:id="@+id/updatePenumpang_et_kelamin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/updateBus_btn_update"
+        android:id="@+id/updatePenumpang_btn_update"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/updateBus_ll_rute"
+        android:layout_below="@+id/updatePenumpang_ll_kelamin"
         android:layout_centerInParent="true"
         android:layout_marginTop="15dp"
         android:background="@drawable/custom_button_1"
