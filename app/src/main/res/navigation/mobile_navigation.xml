@@ -28,4 +28,10 @@
         android:name="upr.uas.pedro.ui.bus.BusFragment"
         android:label="@string/menu_bus"
         tools:layout="@layout/fragment_bus" />
+
+    <fragment
+        android:id="@+id/nav_penumpang"
+        android:name="upr.uas.pedro.ui.bus.BusFragment"
+        android:label="@string/menu_penumpang"
+        tools:layout="@layout/fragment_penumpang" />
 </navigation>

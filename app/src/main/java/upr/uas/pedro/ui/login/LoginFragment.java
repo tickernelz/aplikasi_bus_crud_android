@@ -66,6 +66,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
           Objects.requireNonNull(requireActivity().findViewById(R.id.nav_view));
       Menu menu = navigationView.getMenu();
       MenuItem nav_bus = menu.findItem(R.id.nav_bus);
+      MenuItem nav_penumpang = menu.findItem(R.id.nav_penumpang);
       DBHandler db = new DBHandler(requireContext());
       User user = new User();
       user.setUsername(username);
@@ -73,6 +74,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
       user.setIsLogin(1);
       if (db.checkIsLogin(user)) {
         nav_bus.setEnabled(false);
+        nav_penumpang.setEnabled(false);
         user.setIsLogin(0);
         db.updateIsLogin(user);
         editText_username.setEnabled(true);
@@ -84,6 +86,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
       } else {
         if (db.checkUser(user)) {
           nav_bus.setEnabled(true);
+          nav_penumpang.setEnabled(true);
           editText_username.setEnabled(false);
           editText_password.setEnabled(false);
           button_submit.setText("Logout");
