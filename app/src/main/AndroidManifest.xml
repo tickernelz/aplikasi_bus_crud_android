@@ -19,6 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".crud.pemesanan.UpdatePemesananActivity" />
+        <activity android:name=".crud.pemesanan.CreatePemesananActivity" />
+        <activity android:name=".crud.bus.UpdateBusActivity" />
+        <activity android:name=".crud.bus.CreateBusActivity" />
+        <activity android:name=".crud.penumpang.UpdatePenumpangActivity" />
+        <activity android:name=".crud.penumpang.CreatePenumpangActivity" />
     </application>
 
 </manifest>

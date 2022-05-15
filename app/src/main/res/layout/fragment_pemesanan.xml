@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_pemesanan"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".ui.pemesanan.PemesananFragment">
+
+    <LinearLayout
+        android:id="@+id/viewPemesanan_ll_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Pemesanan List"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/viewPemesanan_tv_noPemesanan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Belum ada pemesanan yang Tersedia"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/viewPemesanan_lv_pemesananList"
+        android:layout_width="match_parent"
+        android:layout_height="570dp"
+        android:layout_below="@id/viewPemesanan_ll_header" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/viewPemesanan_fab_createPemesanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:elevation="6dp"
+        android:src="@drawable/ic_add"
+        app:tint="@null" />
+
+
+</RelativeLayout>
