@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/mobile_navigation"
-            app:startDestination="@+id/nav_home">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
 
     <fragment
-            android:id="@+id/nav_home"
-            android:name="upr.uas.pedro.ui.home.HomeFragment"
-            android:label="@string/menu_home"
-            tools:layout="@layout/fragment_home"/>
+        android:id="@+id/nav_home"
+        android:name="upr.uas.pedro.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
-            android:id="@+id/nav_gallery"
-            android:name="upr.uas.pedro.ui.gallery.GalleryFragment"
-            android:label="@string/menu_gallery"
-            tools:layout="@layout/fragment_gallery"/>
+        android:id="@+id/nav_login"
+        android:name="upr.uas.pedro.ui.login.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" />
 
     <fragment
-            android:id="@+id/nav_slideshow"
-            android:name="upr.uas.pedro.ui.slideshow.SlideshowFragment"
-            android:label="@string/menu_slideshow"
-            tools:layout="@layout/fragment_slideshow"/>
+        android:id="@+id/nav_pemesanan"
+        android:name="upr.uas.pedro.ui.pemesanan.PemesananFragment"
+        android:label="@string/menu_pemesanan"
+        tools:layout="@layout/fragment_pemesanan" />
+
+    <fragment
+        android:id="@+id/nav_bus"
+        android:name="upr.uas.pedro.ui.bus.BusFragment"
+        android:label="@string/menu_bus"
+        tools:layout="@layout/fragment_bus" />
+
+    <fragment
+        android:id="@+id/nav_penumpang"
+        android:name="upr.uas.pedro.ui.penumpang.PenumpangFragment"
+        android:label="@string/menu_penumpang"
+        tools:layout="@layout/fragment_penumpang" />
 </navigation>

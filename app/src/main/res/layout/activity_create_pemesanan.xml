@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".crud.pemesanan.CreatePemesananActivity">
+
+    <LinearLayout
+        android:id="@+id/createPemesanan_ll_nama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama" />
+
+        <EditText
+            android:id="@+id/createPemesanan_et_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/createPemesanan_ll_deskripsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createPemesanan_ll_nama"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kode" />
+
+        <EditText
+            android:id="@+id/createPemesanan_et_kode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/createPemesanan_ll_jadwal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createPemesanan_ll_deskripsi"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jadwal" />
+
+        <EditText
+            android:id="@+id/createPemesanan_date_jadwal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/createPemesanan_btn_create"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createPemesanan_ll_jadwal"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/custom_button_1"
+        android:text="Create"
+        android:textAllCaps="false"
+        android:textStyle="bold" />
+
+</RelativeLayout>
