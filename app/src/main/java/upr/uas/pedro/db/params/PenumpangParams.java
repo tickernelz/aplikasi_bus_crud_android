@@ -1,12 +1,11 @@
 package upr.uas.pedro.db.params;
 
 public class PenumpangParams {
-  public static final String TABLE_NAME = "bus_params";
+  public static final String TABLE_NAME = "penumpang_params";
 
   // Keys of our table in db
   public static final String KEY_ID = "id";
   public static final String KEY_NAMA = "nama";
-  public static final String KEY_KODE = "kode";
-  public static final String KEY_TIPE = "tipe";
-  public static final String KEY_RUTE = "rute";
+  public static final String KEY_UMUR = "umur";
+  public static final String KEY_KELAMIN = "kelamin";
 }
