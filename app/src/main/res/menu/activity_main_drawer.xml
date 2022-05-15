@@ -25,6 +25,6 @@
             android:id="@+id/nav_penumpang"
             android:enabled="false"
             android:icon="@drawable/ic_menu_penumpang"
-            android:title="@string/menu_bus" />
+            android:title="@string/menu_penumpang" />
     </group>
 </menu>

@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/nav_penumpang"
-        android:name="upr.uas.pedro.ui.bus.BusFragment"
+        android:name="upr.uas.pedro.ui.penumpang.PenumpangFragment"
         android:label="@string/menu_penumpang"
         tools:layout="@layout/fragment_penumpang" />
 </navigation>
