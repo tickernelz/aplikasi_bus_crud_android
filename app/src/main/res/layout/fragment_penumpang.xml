@@ -2,15 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_bus"
+    android:id="@+id/fragment_penumpang"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".ui.bus.BusFragment">
+    tools:context=".ui.penumpang.PenumpangFragment">
 
     <LinearLayout
-        android:id="@+id/viewBus_ll_header"
+        android:id="@+id/viewPenumpang_ll_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -19,28 +19,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Bus List"
+            android:text="Penumpang List"
             android:textSize="28sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/viewBus_tv_noBus"
+            android:id="@+id/viewPenumpang_tv_noPenumpang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Belum ada bus yang Tersedia"
+            android:text="Belum ada penumpang yang Tersedia"
             android:textSize="16sp" />
 
     </LinearLayout>
 
     <ListView
-        android:id="@+id/viewBus_lv_busList"
+        android:id="@+id/viewPenumpang_lv_penumpangList"
         android:layout_width="match_parent"
         android:layout_height="570dp"
-        android:layout_below="@id/viewBus_ll_header" />
+        android:layout_below="@id/viewPenumpang_ll_header" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/viewBus_fab_createBus"
+        android:id="@+id/viewPenumpang_fab_createPenumpang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
