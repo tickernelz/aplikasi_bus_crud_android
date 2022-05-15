@@ -18,22 +18,20 @@ public class Penumpang implements Parcelable {
         }
       };
   private int id;
-  private String nama, kode, tipe, rute;
+  private String nama, umur, kelamin;
 
-  public Penumpang(int id, String nama, String kode, String tipe, String rute) {
+  public Penumpang(int id, String nama, String umur, String kelamin) {
     this.id = id;
     this.nama = nama;
-    this.kode = kode;
-    this.tipe = tipe;
-    this.rute = rute;
+    this.umur = umur;
+    this.kelamin = kelamin;
   }
 
   protected Penumpang(Parcel in) {
     id = in.readInt();
     nama = in.readString();
-    kode = in.readString();
-    tipe = in.readString();
-    rute = in.readString();
+    umur = in.readString();
+    kelamin = in.readString();
   }
 
   public int getId() {
@@ -52,28 +50,20 @@ public class Penumpang implements Parcelable {
     this.nama = nama;
   }
 
-  public String getKode() {
-    return kode;
+  public String getUmur() {
+    return umur;
   }
 
-  public void setKode(String kode) {
-    this.kode = kode;
+  public void setUmur(String umur) {
+    this.umur = umur;
   }
 
-  public String getTipe() {
-    return tipe;
+  public String getKelamin() {
+    return kelamin;
   }
 
-  public void setTipe(String tipe) {
-    this.tipe = tipe;
-  }
-
-  public String getRute() {
-    return rute;
-  }
-
-  public void setRute(String rute) {
-    this.rute = rute;
+  public void setKelamin(String kelamin) {
+    this.kelamin = kelamin;
   }
 
   @Override
@@ -85,8 +75,7 @@ public class Penumpang implements Parcelable {
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(id);
     parcel.writeString(nama);
-    parcel.writeString(kode);
-    parcel.writeString(tipe);
-    parcel.writeString(rute);
+    parcel.writeString(umur);
+    parcel.writeString(kelamin);
   }
 }
