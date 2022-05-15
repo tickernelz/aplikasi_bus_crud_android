@@ -14,30 +14,30 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import upr.uas.pedro.R;
-import upr.uas.pedro.crud.bus.UpdateBusActivity;
+import upr.uas.pedro.crud.penumpang.UpdatePenumpangActivity;
 import upr.uas.pedro.db.DBHandler;
-import upr.uas.pedro.object.Bus;
+import upr.uas.pedro.object.Penumpang;
 
 public class PenumpangAdapter extends BaseAdapter {
 
   Context context;
   DBHandler db;
-  ArrayList<Bus> busList;
+  ArrayList<Penumpang> penumpangList;
 
-  public PenumpangAdapter(Context context, ArrayList<Bus> busList, DBHandler db) {
+  public PenumpangAdapter(Context context, ArrayList<Penumpang> penumpangList, DBHandler db) {
     this.context = context;
-    this.busList = busList;
+    this.penumpangList = penumpangList;
     this.db = db;
   }
 
   @Override
   public int getCount() {
-    return this.busList.size();
+    return this.penumpangList.size();
   }
 
   @Override
   public Object getItem(int position) {
-    return busList.get(position);
+    return penumpangList.get(position);
   }
 
   @Override
@@ -50,26 +50,24 @@ public class PenumpangAdapter extends BaseAdapter {
 
     LayoutInflater inflater =
         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    view = inflater.inflate(R.layout.list_bus, null);
+    view = inflater.inflate(R.layout.list_penumpang, null);
 
-    TextView tvNama = (TextView) view.findViewById(R.id.bus_tv_nama);
-    TextView tvKode = (TextView) view.findViewById(R.id.bus_tv_kode);
-    TextView tvTipe = (TextView) view.findViewById(R.id.bus_tv_tipe);
-    TextView tvRute = (TextView) view.findViewById(R.id.bus_tv_rute);
+    TextView tvNama = (TextView) view.findViewById(R.id.penumpang_tv_nama);
+    TextView tvUmur = (TextView) view.findViewById(R.id.penumpang_tv_umur);
+    TextView tvKelamin = (TextView) view.findViewById(R.id.penumpang_tv_kelamin);
 
     Button btnUpdate = (Button) view.findViewById(R.id.post_btn_update);
     Button btnDelete = (Button) view.findViewById(R.id.post_btn_delete);
 
-    Bus bus = busList.get(position);
-    tvNama.setText(bus.getNama());
-    tvKode.setText(bus.getKode());
-    tvTipe.setText(bus.getTipe());
-    tvRute.setText(bus.getRute());
+    Penumpang penumpang = penumpangList.get(position);
+    tvNama.setText(penumpang.getNama());
+    tvUmur.setText(penumpang.getUmur());
+    tvKelamin.setText(penumpang.getKelamin());
 
     btnUpdate.setOnClickListener(
         view1 -> {
-          Intent i = new Intent(context.getApplicationContext(), UpdateBusActivity.class);
-          i.putExtra("Bus", bus);
+          Intent i = new Intent(context.getApplicationContext(), UpdatePenumpangActivity.class);
+          i.putExtra("Penumpang", penumpang);
           context.startActivity(i);
         });
 
@@ -82,8 +80,8 @@ public class PenumpangAdapter extends BaseAdapter {
                   new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                      boolean delete = db.deleteBus(bus.getId());
-                      busList.remove(position);
+                      boolean delete = db.deletePenumpang(penumpang.getId());
+                      penumpangList.remove(position);
                       notifyDataSetChanged();
                       if (delete) {
                         new AlertDialog.Builder(context)

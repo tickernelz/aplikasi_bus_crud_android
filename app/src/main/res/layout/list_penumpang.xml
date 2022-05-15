@@ -5,13 +5,13 @@
     android:padding="5dp">
 
     <LinearLayout
-        android:id="@+id/bus_ll_detail"
+        android:id="@+id/penumpang_ll_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/bus_tv_nama"
+            android:id="@+id/penumpang_tv_nama"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Lorem Ipsum"
@@ -27,14 +27,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kode Bus: " />
+                android:text="Umur: " />
 
             <TextView
-                android:id="@+id/bus_tv_kode"
+                android:id="@+id/penumpang_tv_umur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="[kode]" />
+                android:text="[umur]" />
 
         </LinearLayout>
 
@@ -46,36 +46,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipe: " />
+                android:text="Kelamin: " />
 
             <TextView
-                android:id="@+id/bus_tv_tipe"
+                android:id="@+id/penumpang_tv_kelamin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="[tipe]" />
+                android:text="[kelamin]" />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rute: " />
-
-            <TextView
-                android:id="@+id/bus_tv_rute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="[rute]" />
-
-        </LinearLayout>
-
 
     </LinearLayout>
 
@@ -85,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/bus_ll_detail"
+        android:layout_toRightOf="@id/penumpang_ll_detail"
         android:text="Update"
         android:textSize="11sp" />
 
